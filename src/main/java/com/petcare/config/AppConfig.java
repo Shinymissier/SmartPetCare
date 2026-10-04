@@ -17,7 +17,7 @@ public class AppConfig implements Serializable {
     private String supabaseJdbcUrl = "";
     private String supabaseJdbcUser = "postgres";
     private String supabaseJdbcPassword = "";
-    private String localJdbcUrl = "jdbc:h2:file:C:/Users/SHINY/pet/data/petcaredb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE";
+    private String localJdbcUrl = "jdbc:h2:file:./data/petcaredb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE";
     private String localJdbcUser = "sa";
     private String localJdbcPassword = "";
 
@@ -71,8 +71,9 @@ public class AppConfig implements Serializable {
     }
 
     public boolean isSupabaseConfigured() {
-        return (supabaseUrl != null && !supabaseUrl.isEmpty() && !supabaseUrl.contains("your-project-id"))
-                || (supabaseJdbcUrl != null && !supabaseJdbcUrl.isEmpty() && !supabaseJdbcUrl.contains("your-project"));
+        if (supabaseJdbcUrl == null || supabaseJdbcUrl.trim().isEmpty()) return false;
+        String lowerJdbc = supabaseJdbcUrl.toLowerCase();
+        return !lowerJdbc.contains("your_supabase") && !lowerJdbc.contains("your-project");
     }
 
     public String getDatabaseMode() { return databaseMode; }
