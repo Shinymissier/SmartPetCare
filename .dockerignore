@@ -1,0 +1,11 @@
+target/
+.git/
+.gitignore
+*.mv.db
+*.trace.db
+cookie.txt
+TestConn.class
+.classpath
+.project
+.settings/
+.idea/
