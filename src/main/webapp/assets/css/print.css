@@ -1,0 +1,27 @@
+/* Print stylesheet for Pet Care & Health Reports */
+@media print {
+    .app-sidebar, .app-topbar, .btn, .no-print, .tabs-nav {
+        display: none !important;
+    }
+    .app-main {
+        margin-left: 0 !important;
+        padding: 0 !important;
+    }
+    .page-content {
+        padding: 0 !important;
+    }
+    body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        font-size: 11pt;
+    }
+    .card {
+        border: 1px solid #ccc !important;
+        box-shadow: none !important;
+        page-break-inside: avoid;
+    }
+    .data-table th {
+        background-color: #f0f0f0 !important;
+        color: #000 !important;
+    }
+}

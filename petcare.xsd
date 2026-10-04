@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+
+    <!-- Root Element -->
+    <xs:element name="PetCareRecord">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Pet" type="PetType" minOccurs="1" maxOccurs="unbounded"/>
+                <xs:element name="Vaccinations" type="VaccinationsType" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="MedicalRecords" type="MedicalRecordsType" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="Appointments" type="AppointmentsType" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute name="exportDate" type="xs:string" use="optional"/>
+            <xs:attribute name="generatedBy" type="xs:string" use="optional"/>
+            <xs:attribute name="version" type="xs:string" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Pet Complex Type -->
+    <xs:complexType name="PetType">
+        <xs:sequence>
+            <xs:element name="PetID" type="xs:string"/>
+            <xs:element name="Name">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                        <xs:maxLength value="100"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Species">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                        <xs:maxLength value="50"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Breed" type="xs:string" minOccurs="0"/>
+            <xs:element name="DateOfBirth" type="xs:date" minOccurs="0"/>
+            <xs:element name="Gender" minOccurs="0">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="Male"/>
+                        <xs:enumeration value="Female"/>
+                        <xs:enumeration value="Neutered Male"/>
+                        <xs:enumeration value="Spayed Female"/>
+                        <xs:enumeration value="Unknown"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Weight" minOccurs="0">
+                <xs:simpleType>
+                    <xs:restriction base="xs:decimal">
+                        <xs:minInclusive value="0.01"/>
+                        <xs:maxInclusive value="500.00"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Color" type="xs:string" minOccurs="0"/>
+            <xs:element name="Allergies" type="xs:string" minOccurs="0"/>
+            <xs:element name="HealthConditions" type="xs:string" minOccurs="0"/>
+            <xs:element name="Notes" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Vaccinations Wrapper -->
+    <xs:complexType name="VaccinationsType">
+        <xs:sequence>
+            <xs:element name="Vaccination" type="VaccinationType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Vaccination Item -->
+    <xs:complexType name="VaccinationType">
+        <xs:sequence>
+            <xs:element name="VaccinationID" type="xs:string" minOccurs="0"/>
+            <xs:element name="PetID" type="xs:string" minOccurs="0"/>
+            <xs:element name="PetName" type="xs:string" minOccurs="0"/>
+            <xs:element name="VaccineName">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                        <xs:maxLength value="120"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="VaccinationDate" type="xs:date"/>
+            <xs:element name="NextDueDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="Veterinarian" type="xs:string" minOccurs="0"/>
+            <xs:element name="Clinic" type="xs:string" minOccurs="0"/>
+            <xs:element name="Notes" type="xs:string" minOccurs="0"/>
+            <xs:element name="Status">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="Completed"/>
+                        <xs:enumeration value="Upcoming"/>
+                        <xs:enumeration value="Overdue"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Medical Records Wrapper -->
+    <xs:complexType name="MedicalRecordsType">
+        <xs:sequence>
+            <xs:element name="MedicalRecord" type="MedicalRecordType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Medical Record Item -->
+    <xs:complexType name="MedicalRecordType">
+        <xs:sequence>
+            <xs:element name="RecordID" type="xs:string" minOccurs="0"/>
+            <xs:element name="PetID" type="xs:string" minOccurs="0"/>
+            <xs:element name="PetName" type="xs:string" minOccurs="0"/>
+            <xs:element name="VisitDate" type="xs:date"/>
+            <xs:element name="Diagnosis" type="xs:string"/>
+            <xs:element name="Treatment" type="xs:string" minOccurs="0"/>
+            <xs:element name="Medication" type="xs:string" minOccurs="0"/>
+            <xs:element name="Veterinarian" type="xs:string" minOccurs="0"/>
+            <xs:element name="Clinic" type="xs:string" minOccurs="0"/>
+            <xs:element name="Cost" type="xs:decimal" minOccurs="0"/>
+            <xs:element name="FollowUpDate" type="xs:date" minOccurs="0"/>
+            <xs:element name="Notes" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Appointments Wrapper -->
+    <xs:complexType name="AppointmentsType">
+        <xs:sequence>
+            <xs:element name="Appointment" type="AppointmentType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Appointment Item -->
+    <xs:complexType name="AppointmentType">
+        <xs:sequence>
+            <xs:element name="AppointmentID" type="xs:string" minOccurs="0"/>
+            <xs:element name="PetID" type="xs:string" minOccurs="0"/>
+            <xs:element name="PetName" type="xs:string" minOccurs="0"/>
+            <xs:element name="Title" type="xs:string"/>
+            <xs:element name="AppointmentType">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="Veterinary"/>
+                        <xs:enumeration value="Grooming"/>
+                        <xs:enumeration value="Vaccination"/>
+                        <xs:enumeration value="Checkup"/>
+                        <xs:enumeration value="Training"/>
+                        <xs:enumeration value="Other"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="AppointmentDate" type="xs:string"/>
+            <xs:element name="ProviderName" type="xs:string" minOccurs="0"/>
+            <xs:element name="Location" type="xs:string" minOccurs="0"/>
+            <xs:element name="Status">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="Scheduled"/>
+                        <xs:enumeration value="Completed"/>
+                        <xs:enumeration value="Cancelled"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="Notes" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE PetCareRecord SYSTEM "petcare.dtd">
+<PetCareRecord exportDate="2026-09-30" generatedBy="Smart Pet Care System" version="1.0">
+    <Pet>
+        <PetID>101</PetID>
+        <Name>Bruno</Name>
+        <Species>Dog</Species>
+        <Breed>Golden Retriever</Breed>
+        <DateOfBirth>2023-04-15</DateOfBirth>
+        <Gender>Male</Gender>
+        <Weight>28.50</Weight>
+        <Color>Golden Yellow</Color>
+        <Allergies>Chicken protein</Allergies>
+        <HealthConditions>None</HealthConditions>
+        <Notes>Active and friendly</Notes>
+    </Pet>
+    <Pet>
+        <PetID>102</PetID>
+        <Name>Luna</Name>
+        <Species>Cat</Species>
+        <Breed>Siamese</Breed>
+        <DateOfBirth>2022-08-20</DateOfBirth>
+        <Gender>Female</Gender>
+        <Weight>4.20</Weight>
+        <Color>Seal Point</Color>
+        <Allergies>None known</Allergies>
+        <HealthConditions>Mild sensitive stomach</HealthConditions>
+        <Notes>Affectionate indoor cat</Notes>
+    </Pet>
+    <Vaccinations>
+        <Vaccination>
+            <VaccinationID>V-001</VaccinationID>
+            <PetID>101</PetID>
+            <PetName>Bruno</PetName>
+            <VaccineName>Rabies</VaccineName>
+            <VaccinationDate>2024-05-10</VaccinationDate>
+            <NextDueDate>2027-05-10</NextDueDate>
+            <Veterinarian>Dr. Alex Morales</Veterinarian>
+            <Clinic>Valley Animal Hospital</Clinic>
+            <Notes>3-year booster</Notes>
+            <Status>Completed</Status>
+        </Vaccination>
+        <Vaccination>
+            <VaccinationID>V-002</VaccinationID>
+            <PetID>101</PetID>
+            <PetName>Bruno</PetName>
+            <VaccineName>DHPP Core Booster</VaccineName>
+            <VaccinationDate>2025-10-15</VaccinationDate>
+            <NextDueDate>2026-10-15</NextDueDate>
+            <Veterinarian>Dr. Alex Morales</Veterinarian>
+            <Clinic>Valley Animal Hospital</Clinic>
+            <Notes>Annual booster</Notes>
+            <Status>Upcoming</Status>
+        </Vaccination>
+        <Vaccination>
+            <VaccinationID>V-003</VaccinationID>
+            <PetID>102</PetID>
+            <PetName>Luna</PetName>
+            <VaccineName>FVRCP Feline Core</VaccineName>
+            <VaccinationDate>2025-02-14</VaccinationDate>
+            <NextDueDate>2026-02-14</NextDueDate>
+            <Veterinarian>Dr. Emily Chen</Veterinarian>
+            <Clinic>Paws &amp; Whiskers Clinic</Clinic>
+            <Notes>Booster past due</Notes>
+            <Status>Overdue</Status>
+        </Vaccination>
+    </Vaccinations>
+    <MedicalRecords>
+        <MedicalRecord>
+            <RecordID>M-001</RecordID>
+            <PetID>101</PetID>
+            <PetName>Bruno</PetName>
+            <VisitDate>2026-01-20</VisitDate>
+            <Diagnosis>Minor ear infection (Otitis Externa)</Diagnosis>
+            <Treatment>Ear flush and topical antibacterial drops</Treatment>
+            <Medication>Otomax ointment</Medication>
+            <Veterinarian>Dr. Alex Morales</Veterinarian>
+            <Clinic>Valley Animal Hospital</Clinic>
+            <Cost>85.00</Cost>
+            <FollowUpDate>2026-02-05</FollowUpDate>
+            <Notes>Resolved completely</Notes>
+        </MedicalRecord>
+    </MedicalRecords>
+    <Appointments>
+        <Appointment>
+            <AppointmentID>A-001</AppointmentID>
+            <PetID>101</PetID>
+            <PetName>Bruno</PetName>
+            <Title>Grooming &amp; Bath</Title>
+            <AppointmentType>Grooming</AppointmentType>
+            <AppointmentDate>2026-10-10 10:00</AppointmentDate>
+            <ProviderName>Happy Tails Spa</ProviderName>
+            <Location>124 Elm Street</Location>
+            <Status>Scheduled</Status>
+            <Notes>Full bath and nail trim</Notes>
+        </Appointment>
+    </Appointments>
+</PetCareRecord>

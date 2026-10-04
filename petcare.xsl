@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:output method="html" indent="yes" encoding="UTF-8" doctype-public="about:legacy-compat"/>
+
+    <xsl:template match="/">
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8"/>
+            <title>Pet Care &amp; Health Clinical Report</title>
+            <style>
+                body {
+                    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                    background-color: #ffffff;
+                    color: #1e293b;
+                    margin: 0;
+                    padding: 24px;
+                }
+                .report-header {
+                    border-bottom: 2px solid #2563eb;
+                    padding-bottom: 16px;
+                    margin-bottom: 24px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: flex-start;
+                }
+                .report-title h1 {
+                    font-size: 24px;
+                    color: #0f172a;
+                    margin: 0 0 6px 0;
+                }
+                .report-title p {
+                    color: #64748b;
+                    font-size: 13px;
+                    margin: 0;
+                }
+                .report-meta {
+                    text-align: right;
+                    font-size: 12px;
+                    color: #64748b;
+                }
+                .section-title {
+                    font-size: 16px;
+                    font-weight: 700;
+                    color: #0f172a;
+                    margin: 24px 0 12px 0;
+                    padding-bottom: 6px;
+                    border-bottom: 1px solid #e2e8f0;
+                    display: flex;
+                    align-items: center;
+                }
+                .pet-card {
+                    background: #f8fafc;
+                    border: 1px solid #e2e8f0;
+                    border-radius: 8px;
+                    padding: 16px;
+                    margin-bottom: 20px;
+                }
+                .pet-grid {
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                    gap: 12px;
+                    font-size: 13px;
+                }
+                .pet-item strong {
+                    display: block;
+                    color: #64748b;
+                    font-size: 11px;
+                    text-transform: uppercase;
+                    margin-bottom: 2px;
+                }
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    font-size: 13px;
+                    margin-bottom: 20px;
+                }
+                th {
+                    background-color: #0f172a;
+                    color: #ffffff;
+                    text-align: left;
+                    padding: 10px 12px;
+                    font-weight: 600;
+                    font-size: 12px;
+                }
+                td {
+                    padding: 9px 12px;
+                    border-bottom: 1px solid #e2e8f0;
+                }
+                tr:nth-child(even) {
+                    background-color: #f8fafc;
+                }
+                .badge {
+                    display: inline-block;
+                    padding: 3px 8px;
+                    border-radius: 4px;
+                    font-size: 11px;
+                    font-weight: 600;
+                }
+                .badge-completed { background: #dcfce7; color: #166534; }
+                .badge-upcoming { background: #dbeafe; color: #1e40af; }
+                .badge-overdue { background: #fee2e2; color: #991b1b; }
+                .badge-scheduled { background: #fef3c7; color: #92400e; }
+                .print-footer {
+                    margin-top: 32px;
+                    padding-top: 12px;
+                    border-top: 1px solid #e2e8f0;
+                    font-size: 11px;
+                    color: #94a3b8;
+                    display: flex;
+                    justify-content: space-between;
+                }
+                @media print {
+                    body { padding: 0; }
+                    .no-print { display: none; }
+                }
+            </style>
+        </head>
+        <body>
+            <div class="report-header">
+                <div class="report-title">
+                    <h1>Smart Pet Care &amp; Health Report</h1>
+                    <p>Official Pet Health, Vaccination and Medical Records Summary</p>
+                </div>
+                <div class="report-meta">
+                    <div><strong>Export Date:</strong> <xsl:value-of select="/PetCareRecord/@exportDate"/></div>
+                    <div><strong>System:</strong> Smart Pet Care Tracker</div>
+                    <div><strong>Generated By:</strong> <xsl:value-of select="/PetCareRecord/@generatedBy"/></div>
+                </div>
+            </div>
+
+            <!-- Pet Profiles Summary -->
+            <div class="section-title">1. Pet Profile Summary</div>
+            <xsl:for-each select="/PetCareRecord/Pet">
+                <div class="pet-card">
+                    <div class="pet-grid">
+                        <div class="pet-item">
+                            <strong>Pet Name</strong>
+                            <span style="font-weight: 700; color: #2563eb; font-size: 14px;"><xsl:value-of select="Name"/></span>
+                        </div>
+                        <div class="pet-item">
+                            <strong>Species &amp; Breed</strong>
+                            <span><xsl:value-of select="Species"/> - <xsl:value-of select="Breed"/></span>
+                        </div>
+                        <div class="pet-item">
+                            <strong>Gender &amp; Weight</strong>
+                            <span><xsl:value-of select="Gender"/> (<xsl:value-of select="Weight"/> kg)</span>
+                        </div>
+                        <div class="pet-item">
+                            <strong>Date of Birth</strong>
+                            <span><xsl:value-of select="DateOfBirth"/></span>
+                        </div>
+                        <div class="pet-item">
+                            <strong>Color</strong>
+                            <span><xsl:value-of select="Color"/></span>
+                        </div>
+                        <div class="pet-item">
+                            <strong>Known Allergies</strong>
+                            <span><xsl:value-of select="Allergies"/></span>
+                        </div>
+                        <div class="pet-item">
+                            <strong>Health Conditions</strong>
+                            <span><xsl:value-of select="HealthConditions"/></span>
+                        </div>
+                        <div class="pet-item">
+                            <strong>Notes</strong>
+                            <span><xsl:value-of select="Notes"/></span>
+                        </div>
+                    </div>
+                </div>
+            </xsl:for-each>
+
+            <!-- Vaccination History Table -->
+            <div class="section-title">2. Vaccination History</div>
+            <xsl:choose>
+                <xsl:when test="count(/PetCareRecord/Vaccinations/Vaccination) > 0">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Pet</th>
+                                <th>Vaccine Name</th>
+                                <th>Administered Date</th>
+                                <th>Next Due Date</th>
+                                <th>Veterinarian / Clinic</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <xsl:for-each select="/PetCareRecord/Vaccinations/Vaccination">
+                                <tr>
+                                    <td><strong><xsl:value-of select="PetName"/></strong></td>
+                                    <td><xsl:value-of select="VaccineName"/></td>
+                                    <td><xsl:value-of select="VaccinationDate"/></td>
+                                    <td><xsl:value-of select="NextDueDate"/></td>
+                                    <td>
+                                        <xsl:value-of select="Veterinarian"/>
+                                        <xsl:if test="Clinic != ''"> (<xsl:value-of select="Clinic"/>)</xsl:if>
+                                    </td>
+                                    <td>
+                                        <xsl:choose>
+                                            <xsl:when test="Status = 'Completed'">
+                                                <span class="badge badge-completed">Completed</span>
+                                            </xsl:when>
+                                            <xsl:when test="Status = 'Upcoming'">
+                                                <span class="badge badge-upcoming">Upcoming</span>
+                                            </xsl:when>
+                                            <xsl:when test="Status = 'Overdue'">
+                                                <span class="badge badge-overdue">Overdue</span>
+                                            </xsl:when>
+                                            <xsl:otherwise>
+                                                <span class="badge"><xsl:value-of select="Status"/></span>
+                                            </xsl:otherwise>
+                                        </xsl:choose>
+                                    </td>
+                                </tr>
+                            </xsl:for-each>
+                        </tbody>
+                    </table>
+                </xsl:when>
+                <xsl:otherwise>
+                    <p style="color: #64748b; font-size: 13px;">No vaccination records available.</p>
+                </xsl:otherwise>
+            </xsl:choose>
+
+            <!-- Medical History Table -->
+            <div class="section-title">3. Medical History &amp; Treatments</div>
+            <xsl:choose>
+                <xsl:when test="count(/PetCareRecord/MedicalRecords/MedicalRecord) > 0">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Pet</th>
+                                <th>Visit Date</th>
+                                <th>Diagnosis</th>
+                                <th>Treatment &amp; Medication</th>
+                                <th>Cost ($)</th>
+                                <th>Follow-up</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <xsl:for-each select="/PetCareRecord/MedicalRecords/MedicalRecord">
+                                <tr>
+                                    <td><strong><xsl:value-of select="PetName"/></strong></td>
+                                    <td><xsl:value-of select="VisitDate"/></td>
+                                    <td><xsl:value-of select="Diagnosis"/></td>
+                                    <td>
+                                        <xsl:value-of select="Treatment"/>
+                                        <xsl:if test="Medication != ''"><br/><em>Rx: <xsl:value-of select="Medication"/></em></xsl:if>
+                                    </td>
+                                    <td>$<xsl:value-of select="Cost"/></td>
+                                    <td><xsl:value-of select="FollowUpDate"/></td>
+                                </tr>
+                            </xsl:for-each>
+                        </tbody>
+                    </table>
+                </xsl:when>
+                <xsl:otherwise>
+                    <p style="color: #64748b; font-size: 13px;">No medical visit records found.</p>
+                </xsl:otherwise>
+            </xsl:choose>
+
+            <!-- Appointments Table -->
+            <div class="section-title">4. Scheduled Appointments</div>
+            <xsl:choose>
+                <xsl:when test="count(/PetCareRecord/Appointments/Appointment) > 0">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Pet</th>
+                                <th>Title &amp; Type</th>
+                                <th>Appointment Date</th>
+                                <th>Provider &amp; Location</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <xsl:for-each select="/PetCareRecord/Appointments/Appointment">
+                                <tr>
+                                    <td><strong><xsl:value-of select="PetName"/></strong></td>
+                                    <td>
+                                        <strong><xsl:value-of select="Title"/></strong><br/>
+                                        <small style="color: #64748b;"><xsl:value-of select="AppointmentType"/></small>
+                                    </td>
+                                    <td><xsl:value-of select="AppointmentDate"/></td>
+                                    <td>
+                                        <xsl:value-of select="ProviderName"/><br/>
+                                        <small style="color: #64748b;"><xsl:value-of select="Location"/></small>
+                                    </td>
+                                    <td><span class="badge badge-scheduled"><xsl:value-of select="Status"/></span></td>
+                                </tr>
+                            </xsl:for-each>
+                        </tbody>
+                    </table>
+                </xsl:when>
+                <xsl:otherwise>
+                    <p style="color: #64748b; font-size: 13px;">No appointment records found.</p>
+                </xsl:otherwise>
+            </xsl:choose>
+
+            <div class="print-footer">
+                <div>Confidential Medical &amp; Health Record - Generated by Smart Pet Care and Vaccination Tracker</div>
+                <div>Page 1 of 1</div>
+            </div>
+        </body>
+        </html>
+    </xsl:template>
+</xsl:stylesheet>

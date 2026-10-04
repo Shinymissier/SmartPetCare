@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE PetCareRecord SYSTEM "petcare.dtd">
+<PetCareRecord exportDate="2026-09-30" generatedBy="Test Invalid" version="1.0">
+    <Pet>
+        <PetID>INVALID-01</PetID>
+        <!-- Missing required Name element to trigger DTD / XSD validation error -->
+        <Species>UnknownAlien</Species>
+        <!-- Weight cannot be negative or over 500 in XSD -->
+        <Weight>-55.00</Weight>
+    </Pet>
+    <Vaccinations>
+        <Vaccination>
+            <VaccineName>Experimental Shot</VaccineName>
+            <!-- Invalid Date format -->
+            <VaccinationDate>30-09-2026</VaccinationDate>
+            <!-- Invalid Status value (allowed: Completed, Upcoming, Overdue) -->
+            <Status>UnknownStatusValue</Status>
+        </Vaccination>
+    </Vaccinations>
+</PetCareRecord>

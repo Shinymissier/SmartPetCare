@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Smart Pet Care and Vaccination Tracker
+  Document Type Definition (DTD) for PetCareRecord
+-->
+<!ELEMENT PetCareRecord (Pet+, Vaccinations?, MedicalRecords?, Appointments?)>
+<!ATTLIST PetCareRecord
+    exportDate CDATA #IMPLIED
+    generatedBy CDATA #IMPLIED
+    version CDATA #IMPLIED>
+
+<!ELEMENT Pet (PetID, Name, Species, Breed?, DateOfBirth?, Gender?, Weight?, Color?, Allergies?, HealthConditions?, Notes?)>
+<!ELEMENT PetID (#PCDATA)>
+<!ELEMENT Name (#PCDATA)>
+<!ELEMENT Species (#PCDATA)>
+<!ELEMENT Breed (#PCDATA)>
+<!ELEMENT DateOfBirth (#PCDATA)>
+<!ELEMENT Gender (#PCDATA)>
+<!ELEMENT Weight (#PCDATA)>
+<!ELEMENT Color (#PCDATA)>
+<!ELEMENT Allergies (#PCDATA)>
+<!ELEMENT HealthConditions (#PCDATA)>
+<!ELEMENT Notes (#PCDATA)>
+
+<!ELEMENT Vaccinations (Vaccination*)>
+<!ELEMENT Vaccination (VaccinationID?, PetID?, PetName?, VaccineName, VaccinationDate, NextDueDate?, Veterinarian?, Clinic?, Notes?, Status)>
+<!ELEMENT VaccinationID (#PCDATA)>
+<!ELEMENT PetName (#PCDATA)>
+<!ELEMENT VaccineName (#PCDATA)>
+<!ELEMENT VaccinationDate (#PCDATA)>
+<!ELEMENT NextDueDate (#PCDATA)>
+<!ELEMENT Veterinarian (#PCDATA)>
+<!ELEMENT Clinic (#PCDATA)>
+<!ELEMENT Status (#PCDATA)>
+
+<!ELEMENT MedicalRecords (MedicalRecord*)>
+<!ELEMENT MedicalRecord (RecordID?, PetID?, PetName?, VisitDate, Diagnosis, Treatment?, Medication?, Veterinarian?, Clinic?, Cost?, FollowUpDate?, Notes?)>
+<!ELEMENT RecordID (#PCDATA)>
+<!ELEMENT VisitDate (#PCDATA)>
+<!ELEMENT Diagnosis (#PCDATA)>
+<!ELEMENT Treatment (#PCDATA)>
+<!ELEMENT Medication (#PCDATA)>
+<!ELEMENT Cost (#PCDATA)>
+<!ELEMENT FollowUpDate (#PCDATA)>
+
+<!ELEMENT Appointments (Appointment*)>
+<!ELEMENT Appointment (AppointmentID?, PetID?, PetName?, Title, AppointmentType, AppointmentDate, ProviderName?, Location?, Status, Notes?)>
+<!ELEMENT AppointmentID (#PCDATA)>
+<!ELEMENT Title (#PCDATA)>
+<!ELEMENT AppointmentType (#PCDATA)>
+<!ELEMENT AppointmentDate (#PCDATA)>
+<!ELEMENT ProviderName (#PCDATA)>
+<!ELEMENT Location (#PCDATA)>
